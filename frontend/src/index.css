@@ -72,7 +72,7 @@ body {
     font-family: 'Montserrat', serif;
     font-size: 48px;
     overflow: hidden;
-    animation: typing 5s forwards;
+    animation: typing 4s forwards;
     width: 0;
     white-space: nowrap;
     margin-right: auto;

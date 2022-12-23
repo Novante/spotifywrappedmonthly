@@ -1,45 +1,40 @@
 import {useEffect, useState} from "react";
 import FetchTopArtists from "../components/FetchTopArtists";
+import {AuthorizeSpotify, LoginMessage, WelcomeMessage} from "../components/HomepageMessages";
 import DataCard from "../components/DataCard";
 
 const Homepage = () => {
+
+    const [authorized, setAuthorized] = useState(localStorage.getItem('authed'))
 
     useEffect(() => {
         const queryString = window.location.search
         const urlParams = new URLSearchParams(queryString)
         const token = urlParams.get('token')
         localStorage.setItem('token', token)
-
+        localStorage.setItem('authed', 'true')
     }, [])
 
 
     return (
         <>
-            <nav>
+            {authorized === 'false' && (
+                <>
+                <WelcomeMessage></WelcomeMessage>
+                <LoginMessage></LoginMessage>
+                <AuthorizeSpotify></AuthorizeSpotify>
+                </>
+            )
+            }
 
-            </nav>
-            {/*<div>*/}
-            {/*    <DataCard></DataCard>*/}
-            {/*</div>*/}
+            {authorized === 'true' && (
+                <DataCard></DataCard>
+            )
+
+            }
 
 
-            <div className="nameWrapper">
-                <div className="nameHeader" id="nameHeader">
-                    Welcome.
-                </div>
-            </div>
 
-            <div className="loginMessageWrapper">
-                <div className="loginMessage">
-                    Please begin by authorizing with your Spotify account.
-                </div>
-            </div>
-
-            <div className="spotifyLoginButton">
-                {<a href="http://localhost:3001/login" className="loginButton">
-                    <p>Authorize via Spotify</p>
-                </a>}
-            </div>
 
 
             <div>
