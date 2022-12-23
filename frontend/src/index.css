@@ -9,6 +9,8 @@
 }
 
 .loginButton {
+  display: inline-block;
+  text-align: center;
   border: 0px;
   border-radius: 20px;
   width: 300px;
@@ -16,7 +18,7 @@
   background-color: #B91D82;
   margin-bottom: 500px;
   color: white;
-
+  text-decoration: none;
 }
 
 body {
