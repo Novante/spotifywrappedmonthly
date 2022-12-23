@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 
-const FetchTopArtists = () => {
+const FetchTopArtists = (props) => {
 
-    const [topArts, setTopArts] = useState('')
+    let artists
 
     useEffect(() => {
         fetchArtists()
@@ -16,8 +16,15 @@ const FetchTopArtists = () => {
             })
         })
             .then(res => res.json())
-            .then(res => setTopArts(res))
+            .then(res => artists = res)
+        setArtist()
     }
+
+    const setArtist = () => {
+        props.setArtist(artists.items[1])
+    }
+
+
 
 
     // return (

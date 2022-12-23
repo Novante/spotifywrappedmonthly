@@ -6,6 +6,7 @@
     margin: 0 auto 0 auto;
     overflow: hidden;
     border: 1px solid black;
+    background-color: #FF9A00;
 }
 
 nav {
@@ -13,15 +14,80 @@ nav {
     justify-content: center;
 }
 
-
-
-.dataCard {
-    height: 200px;
-    width: 600px;
+.dataCardOuterWrapper {
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    width: 700px;
     margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
+    background-color: #503651;
+}
+
+.dataCardWrapper {
+    height: 80%;
+    width: 90%;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    margin-top: 50px;
+}
+
+.artistImage {
+    font-size: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.artistNameDesc {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    font-family: 'Montserrat', serif;
+    font-size: 24px;
+    color: #FF9A00;
+
+}
+
+.textMargin {
+    margin-top: 20px;
+}
+
+.artistInfo {
+    margin-top: 20px;
+}
+
+.artistName {
+    font-family: 'Montserrat', serif;
+    font-size: 36px;
+    color: #FF9A00;
+}
+
+.child {
+    color: #FF7F5B;
+    font-size: 2.5rem;
+    border: 1px solid black;
+    width: 300px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imageChild {
+    height: 250px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
 }
 
 body {
@@ -111,3 +177,5 @@ body {
         opacity: 1;
     }
 }
+
+
