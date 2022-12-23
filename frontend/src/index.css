@@ -50,7 +50,7 @@ nav {
     align-items: flex-start;
     flex-direction: column;
     font-family: 'Montserrat', serif;
-    font-size: 24px;
+    font-size: 26px;
     color: #FF9A00;
 
 }
@@ -64,6 +64,12 @@ nav {
 }
 
 .artistName {
+    font-family: 'Montserrat', serif;
+    font-size: 40px;
+    color: #FF9A00;
+}
+
+.topArtistDesc {
     font-family: 'Montserrat', serif;
     font-size: 36px;
     color: #FF9A00;

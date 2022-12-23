@@ -21,7 +21,14 @@ const DataCard = (props) => {
                 )
 
                 }
-                <div className="child"></div>
+                <div className="child">
+                    <div className="topArtists">
+                        <div className="topArtistDesc">
+                            Top Artists
+                        </div>
+                        <div className="topArtists"></div>
+                    </div>
+                </div>
 
                 <div className="child">
                     <div className="artistInfo">
