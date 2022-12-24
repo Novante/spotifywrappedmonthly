@@ -2,11 +2,13 @@ import {useEffect, useState} from "react";
 import FetchTopArtists from "../components/FetchTopArtists";
 import {AuthorizeSpotify, LoginMessage, WelcomeMessage} from "../components/HomepageMessages";
 import DataCard from "../components/DataCard";
+import FetchTopSongs from "../components/FetchTopSongs";
 
 const Homepage = () => {
 
     const [authorized, setAuthorized] = useState(localStorage.getItem('authed'))
     const [artist, setArtist] = useState('')
+    const [songs, setSongs] = useState('')
 
 
     useEffect(() => {
@@ -33,8 +35,9 @@ const Homepage = () => {
 
             {authorized === 'true' && (
                 <>
-                    <DataCard artist={artist}></DataCard>
+                    <DataCard artist={artist} songs={songs}></DataCard>
                     <FetchTopArtists setArtist={setArtist}></FetchTopArtists>
+                    <FetchTopSongs setSongs={setSongs}></FetchTopSongs>
                 </>
 
             )

@@ -3,11 +3,17 @@ import {useEffect, useState} from "react";
 const DataCard = (props) => {
 
     const [artist, setArtist] = useState(props.artist)
+    const [songs, setSongs] = useState(props.songs)
+
     useEffect(() => {
         setArtist(props.artist)
-    }, [props])
+    }, [props.artist])
 
-    console.log(props)
+    useEffect(() => {
+        setSongs(props.songs)
+    },[props.songs])
+
+    console.log(props.songs)
 
 
     return (
@@ -60,7 +66,20 @@ const DataCard = (props) => {
                     </div>
                 </div>
 
-                <div className="child"></div>
+                <div className="child">
+                    <div className="topArtistDesc">
+                        Top Songs
+                    </div>
+                    <div className="topArtists">
+                        <div>
+                            {songs && (
+                                songs?.items.slice(0,5).map((songs) => {
+                                    return <li className="topSongList">{songs.name}</li>
+                                })
+                            )}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )
