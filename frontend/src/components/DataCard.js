@@ -22,12 +22,12 @@ const DataCard = (props) => {
             <div className="dataCardWrapper">
                 {artist && (
                     <div className="imageChild">
-                        <img className="artistImage" src={artist.items[0].images[0].url}></img>
+                        <img className="artistImage" src={artist.items[0].images[1].url}></img>
                     </div>
                 )
 
                 }
-                <div className="child">
+                <div className="child artistChild">
                     <div className="topArtists">
                         <div className="topArtistDesc">
                             Top Artists
@@ -67,7 +67,7 @@ const DataCard = (props) => {
                 </div>
 
                 <div className="child">
-                    <div className="topArtistDesc">
+                    <div className="topArtistDesc topSongDesc">
                         Top Songs
                     </div>
                     <div className="topArtists">

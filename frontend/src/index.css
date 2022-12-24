@@ -29,7 +29,7 @@ nav {
 
 .dataCardWrapper {
     height: 80%;
-    width: 95%;
+    width: 92%;
     /*border: 1px solid black;*/
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -37,15 +37,10 @@ nav {
     margin-top: 50px;
 }
 
-.artistImage {
-    font-size: 2.5rem;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
+
 
 .artistNameDesc {
+    margin-top: 50px;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -61,8 +56,12 @@ nav {
     flex-direction: column;
     font-family: 'Montserrat', serif;
     font-weight: 700;
-    font-size: 26px;
+    font-size: 32px;
     color: #FF9A00;
+}
+
+.artistChild {
+    margin-top: -40px
 }
 
 .textMargin {
@@ -70,13 +69,13 @@ nav {
 }
 
 .artistMargin {
-    margin-top: 5px;
+    margin-top: 6px;
     font-size: 24px;
 
 }
 
 .topSongList {
-    margin-top: 5px;
+    margin-top: 6px;
     font-size: 24px;
 }
 
@@ -96,12 +95,17 @@ li {
 
 .topArtistDesc {
     font-family: 'Montserrat', serif;
-    font-size: 36px;
+    font-size: 42px;
     color: #FF9A00;
     margin-left: 5px;
     font-weight: 700;
 
 }
+
+.topSongDesc {
+    margin-top: -30px;
+}
+
 
 .child {
     color: #FF7F5B;

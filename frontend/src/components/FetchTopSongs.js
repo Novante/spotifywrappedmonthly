@@ -13,7 +13,7 @@ const FetchTopSongs = (props) => {
     }, [token])
 
     const fetchSongs = async () => {
-        await fetch('https://api.spotify.com/v1/me/top/tracks', {
+        await fetch('https://api.spotify.com/v1/me/top/tracks?time_range=short_term', {
             method: 'get',
             headers: new Headers({
                 'Authorization': `Bearer ${token}`
