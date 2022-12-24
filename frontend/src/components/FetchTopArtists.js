@@ -21,7 +21,7 @@ const FetchTopArtists = (props) => {
     }
 
     const setArtist = () => {
-        props.setArtist(artists.items[0])
+        props.setArtist(artists)
     }
 
 

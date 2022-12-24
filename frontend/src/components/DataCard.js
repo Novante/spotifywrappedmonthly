@@ -3,20 +3,20 @@ import {useEffect, useState} from "react";
 const DataCard = (props) => {
 
     const [artist, setArtist] = useState(props.artist)
-
     useEffect(() => {
         setArtist(props.artist)
-    }, [props.artist])
+    }, [props])
 
-    console.log(artist)
+    console.log(props)
 
 
     return (
+
         <div className="dataCardOuterWrapper">
             <div className="dataCardWrapper">
                 {artist && (
                     <div className="imageChild">
-                        <img className="artistImage" src={props?.artist?.images[0]?.url}></img>
+                        <img className="artistImage" src={artist.items[0].images[0].url}></img>
                     </div>
                 )
 
@@ -26,7 +26,15 @@ const DataCard = (props) => {
                         <div className="topArtistDesc">
                             Top Artists
                         </div>
-                        <div className="topArtists"></div>
+                        <div className="topArtists">
+                            <div>
+                                {artist && (
+                                    artist?.items.slice(0,5).map((artist) => {
+                                        return <li className="artistMargin">{artist.name}</li>
+                                    })
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -34,16 +42,20 @@ const DataCard = (props) => {
                     <div className="artistInfo">
                         <div className="artistNameDesc">
                             Favorite artist
-                            <div className="artistName">
-                                {artist.name}
-                            </div>
-
+                            {artist && (
+                                <div className="artistName">
+                                    {artist?.items[0]?.name}
+                                </div>
+                            )}
                             <div className="artistNameDesc textMargin">
                                 Spotify Popularity
                             </div>
-                            <div className="artistName">
-                                {artist.popularity} / 100
-                            </div>
+                            {artist && (
+                                <div className="artistName">
+                                    {artist.items[0].popularity} / 100
+                                </div>
+                            )}
+
                         </div>
                     </div>
                 </div>

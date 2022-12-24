@@ -29,7 +29,7 @@ nav {
 
 .dataCardWrapper {
     height: 80%;
-    width: 90%;
+    width: 95%;
     border: 1px solid black;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -52,15 +52,31 @@ nav {
     font-family: 'Montserrat', serif;
     font-size: 26px;
     color: #FF9A00;
+}
 
+.topArtists {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    font-family: 'Montserrat', serif;
+    font-size: 26px;
+    color: #FF9A00;
 }
 
 .textMargin {
     margin-top: 20px;
 }
 
+.artistMargin {
+    margin-top: 5px;
+}
+
 .artistInfo {
     margin-top: 20px;
+}
+
+li {
+    list-style-type: none;
 }
 
 .artistName {
@@ -73,6 +89,7 @@ nav {
     font-family: 'Montserrat', serif;
     font-size: 36px;
     color: #FF9A00;
+    margin-left: 5px;
 }
 
 .child {
