@@ -17,10 +17,10 @@ export const LoginMessage = () => {
     )
 }
 
-export const AuthorizeSpotify = () => {
+export const AuthorizeSpotify = (props) => {
     return (
         <div className="spotifyLoginButton">
-            {<a href="http://localhost:3001/login" className="loginButton" onClick={() => localStorage.setItem('authed', 'true')
+            {<a href="http://localhost:3001/login" className="loginButton" onClick={() => { localStorage.setItem('authed', 'true'); props.setAuthorized('true')}
             }>
                 <p>Authorize via Spotify</p>
             </a>}

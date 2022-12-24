@@ -3,16 +3,19 @@ import {useEffect, useState} from "react";
 const FetchTopArtists = (props) => {
 
     let artists
+    let token = localStorage.getItem('token')
 
     useEffect(() => {
-        fetchArtists()
-    }, [])
+        if (token !== null){
+            fetchArtists()
+        }
+    },[token])
 
     const fetchArtists = async () => {
         await fetch('https://api.spotify.com/v1/me/top/artists', {
             method: 'get',
             headers: new Headers({
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                'Authorization': `Bearer ${token}`
             })
         })
             .then(res => res.json())
