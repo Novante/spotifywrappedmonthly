@@ -1,0 +1,32 @@
+html {
+    height: 100vh;
+}
+
+body {
+    /*background: #000;*/
+    height: 500vh;
+}
+
+svg {
+    display: inline;
+    margin-left: -60px;
+    margin-top: 500px;
+}
+
+.bigHeader {
+    font-family: 'Montserrat', serif;
+    font-weight: 700;
+    font-size: 80px;
+}
+
+.wrapper {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.topArtistBanner {
+    margin-top: 1000px;
+}
+
+

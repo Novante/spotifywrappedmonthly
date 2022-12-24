@@ -29,7 +29,7 @@ const nav = useNavigate()
 
 
     return (
-        <>
+        <div className="pageContainer">
             {localStorage.getItem('authed') !== 'true' && (
                 <>
                     <WelcomeMessage></WelcomeMessage>
@@ -46,7 +46,7 @@ const nav = useNavigate()
             {/*        <DataCard artist={props.artist} songs={props.songs}></DataCard>*/}
             {/*    </>*/}
             {/*)}*/}
-        </>
+        </div>
 
     )
 
