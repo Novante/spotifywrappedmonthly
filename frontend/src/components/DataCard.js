@@ -35,8 +35,8 @@ const DataCard = (props) => {
                         <div className="topArtists">
                             <div>
                                 {artist && (
-                                    artist?.items.slice(0,5).map((artist) => {
-                                        return <li className="artistMargin">{artist.name}</li>
+                                    artist?.items.slice(0,5).map((artist, index) => {
+                                        return <li key={index} className="artistMargin">{artist.name}</li>
                                     })
                                 )}
                             </div>
@@ -73,8 +73,8 @@ const DataCard = (props) => {
                     <div className="topArtists">
                         <div>
                             {songs && (
-                                songs?.items.slice(0,5).map((songs) => {
-                                    return <li className="topSongList">{songs.name}</li>
+                                songs?.items.slice(0,5).map((songs, index) => {
+                                    return <li key={index} className="topSongList">{songs.name}</li>
                                 })
                             )}
                         </div>

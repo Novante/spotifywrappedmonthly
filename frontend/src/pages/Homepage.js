@@ -15,16 +15,15 @@ const Homepage = () => {
         const queryString = window.location.search
         const urlParams = new URLSearchParams(queryString)
         const token = urlParams.get('token')
-        if (localStorage.getItem('token') !== null) {
+        if (typeof localStorage.getItem('token') != null) {
             localStorage.setItem('token', token)
         }
-        localStorage.setItem('authed', 'true')
     }, [authorized])
 
 
     return (
         <>
-            {authorized !== 'true' && (
+            {localStorage.getItem('authed') !== 'true' && (
                 <>
                     <WelcomeMessage></WelcomeMessage>
                     <LoginMessage></LoginMessage>
@@ -33,7 +32,7 @@ const Homepage = () => {
             )
             }
 
-            {authorized === 'true' && (
+            {localStorage.getItem('authed') && (
                 <>
                     <DataCard artist={artist} songs={songs}></DataCard>
                     <FetchTopArtists setArtist={setArtist}></FetchTopArtists>

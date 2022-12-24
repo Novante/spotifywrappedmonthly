@@ -20,7 +20,8 @@ export const LoginMessage = () => {
 export const AuthorizeSpotify = () => {
     return (
         <div className="spotifyLoginButton">
-            {<a href="http://localhost:3001/login" className="loginButton">
+            {<a href="http://localhost:3001/login" className="loginButton" onClick={() => localStorage.setItem('authed', 'true')
+            }>
                 <p>Authorize via Spotify</p>
             </a>}
 
