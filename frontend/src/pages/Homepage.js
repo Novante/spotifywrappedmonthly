@@ -5,26 +5,27 @@ import DataCard from "../components/DataCard";
 import FetchTopSongs from "../components/FetchTopSongs";
 import {useNavigate} from "react-router-dom";
 
-const Homepage = () => {
+const Homepage = (props) => {
 
     const [authorized, setAuthorized] = useState('')
-    const [artist, setArtist] = useState('')
-    const [songs, setSongs] = useState('')
+
     const [token, setToken] = useState('')
 
-
+const nav = useNavigate()
 
     useEffect(() => {
-        if (window.location.href !== 'http://localhost:3000/'){
+        if (window.location.href.includes('token')){
             const queryString = window.location.search
             const urlParams = new URLSearchParams(queryString)
             const token = urlParams.get('token')
             console.log(window.location.href)
+            console.log(token)
             localStorage.setItem('token', token)
             setToken(token)
+            nav('/stats')
         }
 
-    }, [])
+    }, [window.location.href])
 
 
     return (
@@ -38,13 +39,13 @@ const Homepage = () => {
             )
             }
 
-            {localStorage.getItem('authed') && (
-                <>
-                    <FetchTopArtists token={token} setArtist={setArtist}></FetchTopArtists>
-                    <FetchTopSongs token={token} setSongs={setSongs}></FetchTopSongs>
-                    <DataCard artist={artist} songs={songs}></DataCard>
-                </>
-            )}
+            {/*{localStorage.getItem('authed') && (*/}
+            {/*    <>*/}
+            {/*        <FetchTopArtists token={token} setArtist={props.setArtist}></FetchTopArtists>*/}
+            {/*        <FetchTopSongs token={token} setSongs={props.setSongs}></FetchTopSongs>*/}
+            {/*        <DataCard artist={props.artist} songs={props.songs}></DataCard>*/}
+            {/*    </>*/}
+            {/*)}*/}
         </>
 
     )
