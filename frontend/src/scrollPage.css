@@ -2,16 +2,22 @@ html {
     height: 100vh;
 }
 
+.statsPageContainer {
+    flex-direction: column;
+    height: 1000vh;
+    margin: 0 auto 0 auto;
+    overflow: hidden;
+    /*border: 1px solid black;*/
+    background-color: #FF9A00;
+
+}
+
 body {
     /*background: #000;*/
     height: 500vh;
 }
 
-svg {
-    display: inline;
-    margin-left: -60px;
-    margin-top: 500px;
-}
+
 
 .bigHeader {
     font-family: 'Montserrat', serif;
@@ -27,6 +33,31 @@ svg {
 
 .topArtistBanner {
     margin-top: 1000px;
+    display: flex;
 }
+
+.artistImage{
+}
+
+.scrollPageArtistName{
+    font-family: 'Montserrat', serif;
+    font-weight: 500;
+    font-size: 100px;
+    color: #FF9A00;
+    opacity: 0;
+}
+
+
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
 
 

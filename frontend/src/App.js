@@ -8,12 +8,14 @@ import ScrollPage from "./pages/ScrollPage";
 function App() {
     const [artist, setArtist] = useState('')
     const [songs, setSongs] = useState('')
+    const [token, setToken] = useState('')
 
-  return (
+
+    return (
       <BrowserRouter>
           <div>
           <Routes>
-              <Route  path="/" element={<Homepage artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs}/>}/>
+              <Route path="/" element={<Homepage token={token} setToken={setToken} artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs}/>}/>
               <Route path= "/stats" element={<StatsPage artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs}/>} />
               <Route path="/scroll" element={<ScrollPage artist={artist} songs={songs}/>}/>
           </Routes>

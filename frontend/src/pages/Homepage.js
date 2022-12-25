@@ -4,12 +4,13 @@ import {AuthorizeSpotify, LoginMessage, WelcomeMessage} from "../components/Home
 import DataCard from "../components/DataCard";
 import FetchTopSongs from "../components/FetchTopSongs";
 import {useNavigate} from "react-router-dom";
+import fetchTopArtists from "../components/FetchTopArtists";
+import fetchTopSongs from "../components/FetchTopSongs";
 
 const Homepage = (props) => {
 
     const [authorized, setAuthorized] = useState('')
 
-    const [token, setToken] = useState('')
 
 const nav = useNavigate()
 
@@ -21,11 +22,13 @@ const nav = useNavigate()
             console.log(window.location.href)
             console.log(token)
             localStorage.setItem('token', token)
-            setToken(token)
+            props.setToken(token)
             nav('/stats')
         }
 
     }, [window.location.href])
+
+
 
 
     return (
@@ -35,17 +38,11 @@ const nav = useNavigate()
                     <WelcomeMessage></WelcomeMessage>
                     <LoginMessage></LoginMessage>
                     <AuthorizeSpotify setAuthorized={setAuthorized}></AuthorizeSpotify>
+
                 </>
             )
             }
 
-            {/*{localStorage.getItem('authed') && (*/}
-            {/*    <>*/}
-            {/*        <FetchTopArtists token={token} setArtist={props.setArtist}></FetchTopArtists>*/}
-            {/*        <FetchTopSongs token={token} setSongs={props.setSongs}></FetchTopSongs>*/}
-            {/*        <DataCard artist={props.artist} songs={props.songs}></DataCard>*/}
-            {/*    </>*/}
-            {/*)}*/}
         </div>
 
     )
