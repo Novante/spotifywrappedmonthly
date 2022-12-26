@@ -39,7 +39,6 @@ nav {
 }
 
 
-
 .artistNameDesc {
     margin-top: 50px;
     display: flex;
@@ -206,7 +205,7 @@ body {
     animation-iteration-count: 1;
 }
 
-.authorizedAnimation{
+.authorizedAnimation {
     animation: typing 2s forwards;
     animation-iteration-count: 1;
 }
@@ -249,15 +248,20 @@ body {
     }
 }
 
-
-.scrollingPastArtistImageContainer {
+.scrollingPastArtistImageContainerWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 800px;
-    margin-left: 200px;
-    margin-right: 200px;
-    height: auto;
 }
 
-.scrollingPastArtistImage{
+
+.scrollingPastArtistImageContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 0fr);
+}
+
+.scrollingPastArtistImage {
     display: inline-block;
 }
 

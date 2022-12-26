@@ -8,7 +8,8 @@ const StatsPage = (props) => {
     const [artists, setArtists] = useState([])
     const [songs, setSongs] = useState([])
     const [pxArtistImages, setpxArtistImages] = useState([])
-    const [containerHeight, setContainerHeight] = useState(0)
+    const [containerHeight, setContainerHeight] = useState()
+    const [filtered, setFiltered] = useState([])
     let artistList = ""
     let songList = []
     let testRef = useRef(null)
@@ -24,18 +25,17 @@ const StatsPage = (props) => {
     useEffect(() => {
         console.log(artists)
         console.log(songs)
-        if (artists !== undefined){
+        if (artists !== undefined) {
             select320x320Images()
         }
     }, [artists])
 
 
-
-    useEffect(()=> {
-        if (pxArtistImages !== []){
+    useEffect(() => {
+        if (pxArtistImages !== []) {
             console.log(pxArtistImages.length)
         }
-    },[pxArtistImages])
+    }, [pxArtistImages])
 
     const fetchArtists = async () => {
         artistList = await fetch('https://api.spotify.com/v1/me/top/artists?limit=50', {
@@ -59,65 +59,50 @@ const StatsPage = (props) => {
             .then(res => setSongs([...res.items]))
     }
 
-    const select320x320Images = () => {
-        let height
-        let width
-        let tempArr = []
-        for (let i = 0; i < artists.length; i++) {
-            if (artists[i].images[1].width === 320){
-                let img = new Image()
-                img.onload = function (){
-                    height = img.naturalHeight
-                    width = img.naturalWidth
-                    if (width === 320 && !pxArtistImages.includes(img.src)){
-                        setpxArtistImages(pxArtistImages => [...pxArtistImages, img.src])
-                    }
-                }
-                img.src = artists[i].images[1].url
-
-
-
-
-
-
-
-            }
-
-            // setpxArtistImages([...tempArr])
-        }
-
-        if(pxArtistImages.length % 4 !== 0){
-            let imagesToAdd = 4 - ((pxArtistImages.length) % 4)
-            console.log('num', imagesToAdd)
-            for (let j = 0; j < imagesToAdd; j++) {
-                let randomNumber = Math.floor(Math.random() * pxArtistImages.length)
-                let fillerPhoto = pxArtistImages[randomNumber]
-                setpxArtistImages(pxArtistImages => [...pxArtistImages, fillerPhoto])
-
-            }
+    function loadImg(imgsrc, callback) {
+        let img = new Image()
+        img.onload = callback
+        img.src = imgsrc
+        if (img.naturalHeight === 320 && img.naturalWidth === 320) {
+            return img.src
+        } else {
+            return null
         }
     }
 
-    // {artists && (
-    //     artists?.items.map((artist, index) => {
-    //
-    //         return <img className="scrollingPastArtistImage" src={artist.images[1].url} key={index}></img>
-    //     })
-    // )}
+    const select320x320Images = () => {
+        let tempArr = []
+        for (let i = 0; i < artists.length; i++) {
+            const img = loadImg(artists[i].images[1].url)
+            if (img !== null) {
+                tempArr.push(img)
+            }
+        }
+        if (tempArr.length % 4 !== 0) {
+            for (let i = 0; i < tempArr.length % 4; i++) {
+                tempArr.push(tempArr[Math.floor(Math.random() * tempArr.length)])
+            }
+        }
+        setFiltered(tempArr)
+    }
+
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            autoScrollPastArtists()
-        }, 5000)
-        return () => clearTimeout(timer)
-    }, [])
+        if (containerHeight !== 0) {
+            const timer = setTimeout(() => {
+                autoScrollPastArtists()
+            }, 5000)
+            return () => clearTimeout(timer)
+        }
+    }, [containerHeight])
 
     const autoScrollPastArtists = () => {
         let interval
         interval = setInterval(() => {
             let scrollSpeed = 1
             let windowLocation = window.scrollY
-            // console.log(windowLocation)
+            let containerBottomLocation = 1300 + containerHeight
+            console.log(containerBottomLocation)
 
             if (windowLocation <= 20) {
                 window.scrollBy(0, 1)
@@ -127,9 +112,7 @@ const StatsPage = (props) => {
                 window.scrollBy(0, 3)
             } else if (windowLocation > 120 && windowLocation <= 180) {
                 window.scrollBy(0, 4)
-            } else if (windowLocation > 180 && windowLocation <= 240) {
-                window.scrollBy(0, 5)
-            } else if (windowLocation > 240 && windowLocation <= 2000) {
+            } else if (windowLocation > 180 && windowLocation <= containerBottomLocation) {
                 window.scrollBy(0, 5)
             }
         }, 1)
@@ -137,15 +120,11 @@ const StatsPage = (props) => {
 
     return (
         <div id="page" className="statsPageContainer">
-                <WelcomeMessage token={props.token}></WelcomeMessage>
-                <LoginMessage></LoginMessage>
-                {/*<div ref={testRef} id="scrollingPastArtistImageContainer" className="scrollingPastArtistImageContainer">*/}
-                {/*    {pxArtistImages.map((img, index) => {*/}
-                {/*        return <img style={{marginTop: -4}} key={index} src={img}></img>*/}
-                {/*    })}*/}
-                {/*    {pxArtistImagesLength}*/}
-                {/*</div>*/}
-                <ScrollingArtists setContainerHeight={setContainerHeight} pxArtistImages={pxArtistImages}></ScrollingArtists>
+            <WelcomeMessage token={props.token}></WelcomeMessage>
+            <LoginMessage></LoginMessage>
+
+            <ScrollingArtists filtered={filtered} setContainerHeight={setContainerHeight}
+                              pxArtistImages={pxArtistImages}></ScrollingArtists>
             {containerHeight}
 
         </div>
