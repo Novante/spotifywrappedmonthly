@@ -1,11 +1,13 @@
 import {AuthorizeSpotify, LoginMessage, WelcomeMessage} from "../components/HomepageMessages";
 import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import ScrollingArtists from '../components/ScrollingArtists'
+import ScrollPage from "./ScrollPage";
 
 
 const StatsPage = (props) => {
 
-    const [artists, setArtists] = useState([])
+    const [allArtists, setAllArtists] = useState(0)
+    const [artists, setArtists] = useState(0)
     const [songs, setSongs] = useState([])
     const [pxArtistImages, setpxArtistImages] = useState([])
     const [containerHeight, setContainerHeight] = useState()
@@ -19,14 +21,13 @@ const StatsPage = (props) => {
     useEffect(() => {
         fetchArtists()
         fetchSongs()
-
     }, [])
 
     useEffect(() => {
-        console.log(artists)
-        console.log(songs)
-        if (artists !== undefined) {
+        if (artists !== 0) {
+            console.log(artists)
             select320x320Images()
+            setAllArtists(artists)
         }
     }, [artists])
 
@@ -78,54 +79,66 @@ const StatsPage = (props) => {
                 tempArr.push(img)
             }
         }
+
+        setpxArtistImages(tempArr)
         if (tempArr.length % 4 !== 0) {
             for (let i = 0; i < tempArr.length % 4; i++) {
                 tempArr.push(tempArr[Math.floor(Math.random() * tempArr.length)])
             }
         }
+
         setFiltered(tempArr)
+
     }
 
 
     useEffect(() => {
         if (containerHeight !== 0) {
+
+            console.log(containerHeight)
             const timer = setTimeout(() => {
                 autoScrollPastArtists()
-            }, 5000)
+            }, 10)
             return () => clearTimeout(timer)
         }
     }, [containerHeight])
 
     const autoScrollPastArtists = () => {
         let interval
-        interval = setInterval(() => {
-            let scrollSpeed = 1
-            let windowLocation = window.scrollY
-            let containerBottomLocation = 1300 + containerHeight
-            console.log(containerBottomLocation)
-
-            if (windowLocation <= 20) {
-                window.scrollBy(0, 1)
-            } else if (windowLocation > 20 && windowLocation <= 60) {
-                window.scrollBy(0, 2)
-            } else if (windowLocation > 60 && windowLocation <= 120) {
-                window.scrollBy(0, 3)
-            } else if (windowLocation > 120 && windowLocation <= 180) {
-                window.scrollBy(0, 4)
-            } else if (windowLocation > 180 && windowLocation <= containerBottomLocation) {
-                window.scrollBy(0, 5)
-            }
-        }, 1)
+        // interval = setInterval(() => {
+        //     let scrollSpeed = 1
+        //     let windowLocation = window.scrollY
+        //     let containerBottomLocation = 1095 + containerHeight
+        //     console.log(containerBottomLocation)
+        //     console.log(windowLocation)
+        //
+        //     if (windowLocation <= 20) {
+        //         window.scrollBy(0, 1)
+        //     } else if (windowLocation > 20 && windowLocation <= 60) {
+        //         window.scrollBy(0, 2)
+        //     } else if (windowLocation > 60 && windowLocation <= 120) {
+        //         window.scrollBy(0, 3)
+        //     } else if (windowLocation > 120 && windowLocation <= 180) {
+        //         window.scrollBy(0, 4)
+        //     } else if (windowLocation > 180 && windowLocation <= containerBottomLocation - 1000) {
+        //         window.scrollBy(0, 5)
+        //     } else if (windowLocation > containerBottomLocation - 1000 && windowLocation <= containerBottomLocation - 700){
+        //         clearInterval(interval)
+        //     }
+        // }, 1)
     }
 
     return (
+        <div className="statsPageWrapper">
         <div id="page" className="statsPageContainer">
             <WelcomeMessage token={props.token}></WelcomeMessage>
             <LoginMessage></LoginMessage>
 
             <ScrollingArtists filtered={filtered} setContainerHeight={setContainerHeight}
                               pxArtistImages={pxArtistImages}></ScrollingArtists>
-            {containerHeight}
+
+        </div>
+            <ScrollPage allArtists={allArtists}></ScrollPage>
 
         </div>
 

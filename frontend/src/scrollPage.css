@@ -1,16 +1,37 @@
+:root {
+    --scrollingArtistContainerEndHeight: 0px;
+    --scrollingArtistContainerAnimationDelay: 200s;
+}
+
 html {
     height: 100vh;
 }
 
-.statsPageContainer {
-    flex-direction: column;
+.statsPageWrapper{
     height: 1000vh;
-    margin: 0 auto 0 auto;
-    overflow: hidden;
-    /*border: 1px solid black;*/
     background-color: #FF9A00;
 
 }
+
+.statsPageContainer {
+    flex-direction: column;
+    margin: 0 auto 0 auto;
+    overflow: hidden;
+    /*border: 1px solid black;*/
+    animation: slide 8s forwards;
+    animation-delay: var(--scrollingArtistContainerAnimationDelay);
+}
+
+
+@keyframes slide {
+    0% {
+        margin-top: 0;
+    }
+    100% {
+        margin-top: var(--scrollingArtistContainerEndHeight);
+    }
+}
+
 
 body {
     /*background: #000;*/
@@ -26,14 +47,15 @@ body {
 }
 
 .wrapper {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    margin-left: 200px;
 }
 
 .topArtistBanner {
     margin-top: 1000px;
     display: flex;
+
+
 }
 
 .artistImage{
@@ -42,10 +64,30 @@ body {
 .scrollPageArtistName{
     font-family: 'Montserrat', serif;
     font-weight: 500;
-    font-size: 100px;
-    color: #FF9A00;
+    font-size: 80px;
+    color: #503651;
     opacity: 0;
+    animation: fadeInAnimation;
+    line-height: 60px;
+    margin-left: 8px;
 }
+
+.topArtistText{
+    font-family: 'Montserrat', serif;
+    font-weight: 500;
+    color: #503651;
+    font-size: 22px;
+    margin-left: 8px;
+    width: 100%;
+    text-overflow: ellipsis;
+    opacity: 0;
+    animation: fadeInAnimation;
+}
+
+.topArtistScroll{
+
+}
+
 
 
 
