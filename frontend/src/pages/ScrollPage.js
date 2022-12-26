@@ -1,5 +1,6 @@
 import scrollPage from '../scrollPage.css'
 import {useEffect, useLayoutEffect, useRef, useState} from "react";
+import FetchRelatedArtists from "../components/FetchRelatedArtists";
 
 const ScrollPage = (props) => {
 
@@ -13,14 +14,15 @@ const ScrollPage = (props) => {
     let topArtistAndNameOpacity = 0
     let descriptionTextOpacity = 0
     let similarArtistTextOpacity = 0
+    let similarArtistImageContainerOpacity = 0
 
 
 
-    // useEffect(() => {
-    //     if (props.allArtists !== 0){
-    //         console.log(props.allArtists)
-    //     }
-    // }, [props.allArtists])
+    useEffect(() => {
+        if (props.allArtists !== 0){
+            console.log(props.allArtists)
+        }
+    }, [props.allArtists])
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
@@ -43,19 +45,22 @@ const ScrollPage = (props) => {
 
 
         if (window.scrollY > 900 && hangScroll < 20){
-
             lastScrollPos = 900
-            if (hangScroll < 2){
+            if (hangScroll < 1){
                 topArtistAndNameOpacity += 0.01
                 document.getElementById('artistName').style.setProperty("opacity", topArtistAndNameOpacity)
-            } else if (hangScroll > 2 && hangScroll < 3){
-                descriptionTextOpacity += 0.02
+            } else if (hangScroll > 1 && hangScroll < 2){
+                descriptionTextOpacity += 0.01
                 document.getElementById('topArtistMonthText').style.setProperty('opacity', descriptionTextOpacity)
-            } else if (hangScroll > 3 && hangScroll < 4){
+            } else if (hangScroll > 2 && hangScroll < 2.5){
                 similarArtistTextOpacity += 0.02
                 document.getElementById('similarArtistsText').style.setProperty('opacity', similarArtistTextOpacity)
+            } else if (hangScroll > 2.5 && hangScroll < 3.5){
+                similarArtistImageContainerOpacity += 0.02
+                document.getElementById('relatedArtistImageContainer').style.setProperty('opacity', similarArtistImageContainerOpacity)
             } else {
                 hangScroll = 20
+
             }
 
             window.scrollTo(0, 900)
@@ -84,11 +89,14 @@ const ScrollPage = (props) => {
                     </div>
                         <div style={{width: '70%', flexDirection: 'column', marginTop: '50px'}}>
                         <p id="topArtistMonthText" className="topArtistText">Your top artist of the month is {props?.allArtists[0]?.name}!</p>
-                        <p id="similarArtistsText" className="topArtistText" style={{marginTop: '50px'}}>While we know that you can't get enough of them, here are a few similar artists that you might have missed:</p>
+                        <p id="similarArtistsText" className="topArtistText" style={{marginTop: '70px'}}>While we know that you can't get enough of them, here are a few similar artists that deserve some love too:</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <FetchRelatedArtists topArtist={props.allArtists[0]}></FetchRelatedArtists>
+
 
         </div>
 

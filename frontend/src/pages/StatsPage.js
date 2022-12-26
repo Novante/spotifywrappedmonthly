@@ -2,6 +2,8 @@ import {AuthorizeSpotify, LoginMessage, WelcomeMessage} from "../components/Home
 import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import ScrollingArtists from '../components/ScrollingArtists'
 import ScrollPage from "./ScrollPage";
+import FetchCurrentTrack from "../components/FetchCurrentTrack";
+import FetchRelatedArtists from "../components/FetchRelatedArtists";
 
 
 const StatsPage = (props) => {
@@ -45,8 +47,9 @@ const StatsPage = (props) => {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             })
         })
-            .then(res => res.json())
-            .then(res => setArtists([...res.items]))
+        const json = await artistList.json()
+        setArtists(json.items)
+
     }
 
     const fetchSongs = async () => {
@@ -56,8 +59,8 @@ const StatsPage = (props) => {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             })
         })
-            .then(res => res.json())
-            .then(res => setSongs([...res.items]))
+        const json = await artistList.json()
+        setSongs(json.items)
     }
 
     function loadImg(imgsrc, callback) {
@@ -81,51 +84,14 @@ const StatsPage = (props) => {
         }
 
         setpxArtistImages(tempArr)
-        if (tempArr.length % 4 !== 0) {
-            for (let i = 0; i < tempArr.length % 4; i++) {
+        if (tempArr.length % 3 !== 0) {
+            let remainder = 3 - tempArr.length % 3
+            console.log('remainder' + remainder)
+            for (let i = 0; i < remainder; i++) {
                 tempArr.push(tempArr[Math.floor(Math.random() * tempArr.length)])
             }
         }
-
         setFiltered(tempArr)
-
-    }
-
-
-    useEffect(() => {
-        if (containerHeight !== 0) {
-
-            console.log(containerHeight)
-            const timer = setTimeout(() => {
-                autoScrollPastArtists()
-            }, 10)
-            return () => clearTimeout(timer)
-        }
-    }, [containerHeight])
-
-    const autoScrollPastArtists = () => {
-        let interval
-        // interval = setInterval(() => {
-        //     let scrollSpeed = 1
-        //     let windowLocation = window.scrollY
-        //     let containerBottomLocation = 1095 + containerHeight
-        //     console.log(containerBottomLocation)
-        //     console.log(windowLocation)
-        //
-        //     if (windowLocation <= 20) {
-        //         window.scrollBy(0, 1)
-        //     } else if (windowLocation > 20 && windowLocation <= 60) {
-        //         window.scrollBy(0, 2)
-        //     } else if (windowLocation > 60 && windowLocation <= 120) {
-        //         window.scrollBy(0, 3)
-        //     } else if (windowLocation > 120 && windowLocation <= 180) {
-        //         window.scrollBy(0, 4)
-        //     } else if (windowLocation > 180 && windowLocation <= containerBottomLocation - 1000) {
-        //         window.scrollBy(0, 5)
-        //     } else if (windowLocation > containerBottomLocation - 1000 && windowLocation <= containerBottomLocation - 700){
-        //         clearInterval(interval)
-        //     }
-        // }, 1)
     }
 
     return (
@@ -138,7 +104,8 @@ const StatsPage = (props) => {
                               pxArtistImages={pxArtistImages}></ScrollingArtists>
 
         </div>
-            <ScrollPage allArtists={allArtists}></ScrollPage>
+
+            <ScrollPage topArtist={allArtists[0]} allArtists={allArtists}></ScrollPage>
 
         </div>
 

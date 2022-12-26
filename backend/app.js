@@ -15,7 +15,7 @@ app.get('/login', (req, res) => {
         querystring.stringify({
             response_type: 'code',
             client_id: 'ffd6a605a1f34869988b79ef09d521e9',
-            scope: 'user-top-read',
+            scope: 'user-top-read user-read-currently-playing user-read-playback-state streaming',
             redirect_uri: 'http://localhost:3001/callback',
         }));
 })

@@ -10,12 +10,11 @@ html {
 .statsPageWrapper{
     height: 1000vh;
     background-color: #FF9A00;
-
+    margin: 0 auto 0 auto;
 }
 
 .statsPageContainer {
     flex-direction: column;
-    margin: 0 auto 0 auto;
     overflow: hidden;
     /*border: 1px solid black;*/
     animation: slide 8s forwards;
