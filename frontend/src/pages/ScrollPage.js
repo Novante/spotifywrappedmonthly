@@ -4,6 +4,7 @@ import FetchRelatedArtists from "../components/FetchRelatedArtists";
 
 const ScrollPage = (props) => {
 
+    const [relatedImageBoxHeight, setRelatedImageContainerHeight] = useState(0)
     const [songs, setSongs] = useState(props.songs)
     let counter = 1
 
@@ -17,6 +18,9 @@ const ScrollPage = (props) => {
     let similarArtistImageContainerOpacity = 0
 
 
+    useEffect(() => {
+        console.log(relatedImageBoxHeight, 'FAJWIFJWAIFJWAF')
+    }, [relatedImageBoxHeight])
 
     useEffect(() => {
         if (props.allArtists !== 0){
@@ -95,7 +99,8 @@ const ScrollPage = (props) => {
                 </div>
             </div>
 
-            <FetchRelatedArtists topArtist={props.allArtists[0]}></FetchRelatedArtists>
+            <FetchRelatedArtists setRelatedImageContainerHeight={setRelatedImageContainerHeight} topArtist={props.allArtists[0]}></FetchRelatedArtists>
+
 
 
         </div>

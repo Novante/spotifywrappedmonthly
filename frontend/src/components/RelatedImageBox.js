@@ -1,6 +1,9 @@
-import {useLayoutEffect} from "react";
+import {useEffect, useLayoutEffect, useRef} from "react";
 
 const RelatedImageBox = (props) => {
+
+    const ref = useRef()
+
 
     useLayoutEffect(() => {
         const col = document.getElementsByClassName('testImage')
@@ -11,12 +14,11 @@ const RelatedImageBox = (props) => {
             }
         }
 
-
-
     })
 
+
     return(
-        <div id="relatedImageBox" className="relatedImageBox">
+        <div ref={ref} id="relatedImageBox" className="relatedImageBox">
             <img className="testImage" src={props.image}></img>
             <p className="relatedImageBoxArtistName">{props.artists.name}</p>
 

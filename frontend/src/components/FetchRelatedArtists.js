@@ -1,4 +1,4 @@
-import {useEffect, useLayoutEffect, useState} from "react";
+import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import RelatedImageBox from "./RelatedImageBox";
 
 const FetchRelatedArtists = (props) => {
@@ -6,12 +6,15 @@ const FetchRelatedArtists = (props) => {
     let token = localStorage.getItem('token')
     const [relatedArtistImages, setRelatedArtistImages] = useState([])
     const [artists, setArtists] = useState([])
+    const ref = useRef()
 
     useEffect(() => {
         console.log(props.topArtist?.id)
-        if (props.topArtist !== null && props.topArtist?.id !== undefined) {
+        if (props.topArtist !== null || props.topArtist?.id !== undefined) {
             fetchRelated(props.topArtist?.id)
         }
+
+        props.setRelatedImageContainerHeight(ref.current.offsetHeight)
     }, [props.topArtist])
 
 
@@ -42,10 +45,9 @@ const FetchRelatedArtists = (props) => {
 
     }
 
-
     return (
         <div className="relatedArtistImageContainerWrapper">
-            <div id="relatedArtistImageContainer" className="relatedArtistImageContainer">
+            <div ref={ref} id="relatedArtistImageContainer" className="relatedArtistImageContainer">
                 {artists &&
                     artists.map((artist) => {
                         return <RelatedImageBox artists={artist} image={artist.images[2].url}/>
