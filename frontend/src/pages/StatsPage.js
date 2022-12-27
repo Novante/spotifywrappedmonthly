@@ -28,7 +28,7 @@ const StatsPage = (props) => {
     useEffect(() => {
         if (artists !== 0) {
             console.log(artists)
-            select320x320Images()
+            // select320x320Images()
             setAllArtists(artists)
         }
     }, [artists])
@@ -63,36 +63,36 @@ const StatsPage = (props) => {
         setSongs(json.items)
     }
 
-    function loadImg(imgsrc, callback) {
-        let img = new Image()
-        img.onload = callback // byt till function sen
-        img.src = imgsrc
-        if (img.naturalHeight === 320 && img.naturalWidth === 320) {
-            return img.src
-        } else {
-            return null
-        }
-    }
-
-    const select320x320Images = () => {
-        let tempArr = []
-        for (let i = 0; i < artists.length; i++) {
-            const img = loadImg(artists[i].images[1].url)
-            if (img !== null) {
-                tempArr.push(img)
-            }
-        }
-
-        setpxArtistImages(tempArr)
-        if (tempArr.length % 3 !== 0) {
-            let remainder = 3 - tempArr.length % 3
-            console.log('remainder' + remainder)
-            for (let i = 0; i < remainder; i++) {
-                tempArr.push(tempArr[Math.floor(Math.random() * tempArr.length)])
-            }
-        }
-        setFiltered(tempArr)
-    }
+    // function loadImg(imgsrc, callback) {
+    //     let img = new Image()
+    //     img.onload = callback // byt till function sen
+    //     img.src = imgsrc
+    //     if (img.naturalHeight === 320 && img.naturalWidth === 320) {
+    //         return img.src
+    //     } else {
+    //         return null
+    //     }
+    // }
+    //
+    // const select320x320Images = () => {
+    //     let tempArr = []
+    //     for (let i = 0; i < artists.length; i++) {
+    //         const img = loadImg(artists[i].images[1].url)
+    //         if (img !== null) {
+    //             tempArr.push(img)
+    //         }
+    //     }
+    //
+    //     setpxArtistImages(tempArr)
+    //     if (tempArr.length % 3 !== 0) {
+    //         let remainder = 3 - tempArr.length % 3
+    //         console.log('remainder' + remainder)
+    //         for (let i = 0; i < remainder; i++) {
+    //             tempArr.push(tempArr[Math.floor(Math.random() * tempArr.length)])
+    //         }
+    //     }
+    //     setFiltered(tempArr)
+    // }
 
     return (
         <div className="statsPageWrapper">
@@ -100,7 +100,7 @@ const StatsPage = (props) => {
             <WelcomeMessage token={props.token}></WelcomeMessage>
             <LoginMessage></LoginMessage>
 
-            <ScrollingArtists filtered={filtered} setContainerHeight={setContainerHeight}
+            <ScrollingArtists filtered={props.fetchedArtist} setContainerHeight={setContainerHeight}
                               pxArtistImages={pxArtistImages}></ScrollingArtists>
 
         </div>

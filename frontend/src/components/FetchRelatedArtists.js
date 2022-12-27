@@ -11,7 +11,7 @@ const FetchRelatedArtists = (props) => {
     useEffect(() => {
         console.log(props.topArtist?.id)
         if (props.topArtist !== null || props.topArtist?.id !== undefined) {
-            fetchRelated(props.topArtist?.id)
+            // fetchRelated(props.topArtist?.id)
         }
 
         props.setRelatedImageContainerHeight(ref.current.offsetHeight)
@@ -22,28 +22,28 @@ const FetchRelatedArtists = (props) => {
 
     console.log(relatedArtistImages)
 
-    const fetchRelated = async (id) => {
-        let tempArr = []
-        const res = await fetch(`https://api.spotify.com/v1/artists/${id}/related-artists`, {
-            method: 'get',
-            headers: new Headers({
-                'Authorization': `Bearer ${token}`
-            })
-        })
-        const json = await res.json()
-        console.log(json.artists)
-
-        for (let i = 0; i < json.artists.length; i++) {
-            if (json.artists[i].images[2].height === 160 && json.artists[i].images[2].width === 160) {
-                tempArr.push(json.artists[i])
-            }
-        }
-
-        console.log(json.artists[0].name)
-        setRelatedArtistImages(tempArr)
-        setArtists(tempArr)
-
-    }
+    // const fetchRelated = async (id) => {
+    //     let tempArr = []
+    //     const res = await fetch(`https://api.spotify.com/v1/artists/${id}/related-artists`, {
+    //         method: 'get',
+    //         headers: new Headers({
+    //             'Authorization': `Bearer ${token}`
+    //         })
+    //     })
+    //     const json = await res.json()
+    //     console.log(json.artists)
+    //
+    //     for (let i = 0; i < json.artists.length; i++) {
+    //         if (json.artists[i].images[2].height === 160 && json.artists[i].images[2].width === 160) {
+    //             tempArr.push(json.artists[i])
+    //         }
+    //     }
+    //
+    //     console.log(json.artists[0].name)
+    //     setRelatedArtistImages(tempArr)
+    //     setArtists(tempArr)
+    //
+    // }
 
     return (
         <div className="relatedArtistImageContainerWrapper">

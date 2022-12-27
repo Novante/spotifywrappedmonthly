@@ -8,7 +8,6 @@ import fetchTopArtists from "../components/FetchTopArtists";
 import fetchTopSongs from "../components/FetchTopSongs";
 
 const Homepage = (props) => {
-
     const [authorized, setAuthorized] = useState('')
     let authed = null
 
@@ -38,7 +37,14 @@ const nav = useNavigate()
     const getInfo = async (token) => {
         const res = await fetch(`http://localhost:3001/getinfo?token=${token}`)
         const json = await res.json()
+        console.log(json)
+
+        const res2 = await fetch(`http://localhost:3001/getrelatedartists?token=${token}&artistId=${json.items[0].id}`)
+        const json2 = await res2.json()
+
         props.setFetchedArtist(json.items)
+        console.log(json2.items)
+        // props.setFetchedRelatedArtists(json2.items)
         authed = true
     }
 

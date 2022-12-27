@@ -55,6 +55,36 @@ app.get('/getinfo/', async (req, res) => {
 
 })
 
+app.get('/getrelatedartists/', async(req,res) => {
+    let token = req.query.token
+    let artistId = req.query.artistId
+    console.log('neger')
+
+        let tempArr = []
+        const artistList = await fetch(`https://api.spotify.com/v1/artists/${artistId}/related-artists`, {
+            method: 'get',
+            headers: new Headers({
+                'Authorization': `Bearer ${token}`
+            })
+        })
+        const json = await artistList.json()
+        console.log(json.artists)
+
+        for (let i = 0; i < json.artists.length; i++) {
+            if (json.artists[i].images[2].height === 160 && json.artists[i].images[2].width === 160) {
+                tempArr.push(json.artists[i])
+            }
+        }
+
+        console.log(tempArr)
+
+        console.log(json.artists[0].name)
+
+        res.send(tempArr)
+
+
+})
+
 app.listen(port, () => {
     console.log(`Running on http://localhost:${port}`)
 })
