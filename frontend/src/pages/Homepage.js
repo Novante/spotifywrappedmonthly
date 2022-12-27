@@ -10,23 +10,37 @@ import fetchTopSongs from "../components/FetchTopSongs";
 const Homepage = (props) => {
 
     const [authorized, setAuthorized] = useState('')
-
+    let authed = null
 
 const nav = useNavigate()
 
-    useEffect(() => {
-        if (window.location.href.includes('token')){
+    useEffect( () => {
+        if (window.location.href.includes('token')) {
             const queryString = window.location.search
             const urlParams = new URLSearchParams(queryString)
             const token = urlParams.get('token')
+            getInfo(token)
             console.log(window.location.href)
             console.log(token)
             localStorage.setItem('token', token)
             props.setToken(token)
-            nav('/stats')
+
         }
 
     }, [window.location.href])
+
+    useEffect(() => {
+        if (props.fetchedArtists !== null){
+                nav('/stats')
+        }
+    },[props.fetchedArtists])
+
+    const getInfo = async (token) => {
+        const res = await fetch(`http://localhost:3001/getinfo?token=${token}`)
+        const json = await res.json()
+        props.setFetchedArtist(json.items)
+        authed = true
+    }
 
 
 

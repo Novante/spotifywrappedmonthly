@@ -10,13 +10,16 @@ function App() {
     const [songs, setSongs] = useState('')
     const [token, setToken] = useState('')
 
+    const [fetchedArtist, setFetchedArtist] = useState(null)
+    const [fetchedRelatedArtists, setFetchedRelatedArtists] = useState(null)
+
 
     return (
       <BrowserRouter>
           <div>
           <Routes>
-              <Route path="/" element={<Homepage token={token} setToken={setToken} artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs}/>}/>
-              <Route path= "/stats" element={<StatsPage artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs}/>} />
+              <Route path="/" element={<Homepage fetchedArtists={fetchedArtist} setFetchedArtist={setFetchedArtist} setFetchedRelatedArtists={setFetchedRelatedArtists} token={token} setToken={setToken} artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs}/>}/>
+              <Route path="/stats" element={<StatsPage artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs} fetchedArtist={fetchedArtist}/>} />
               <Route path="/scroll" element={<ScrollPage artist={artist} songs={songs}/>}/>
           </Routes>
           </div>

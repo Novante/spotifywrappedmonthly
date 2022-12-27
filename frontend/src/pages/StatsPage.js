@@ -65,7 +65,7 @@ const StatsPage = (props) => {
 
     function loadImg(imgsrc, callback) {
         let img = new Image()
-        img.onload = callback
+        img.onload = callback // byt till function sen
         img.src = imgsrc
         if (img.naturalHeight === 320 && img.naturalWidth === 320) {
             return img.src

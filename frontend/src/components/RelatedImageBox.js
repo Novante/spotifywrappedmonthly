@@ -13,8 +13,7 @@ const RelatedImageBox = (props) => {
                 col[i].parentNode.remove()
             }
         }
-
-    })
+    },[])
 
 
     return(

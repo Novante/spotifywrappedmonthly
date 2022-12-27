@@ -40,6 +40,21 @@ app.get('/callback', (req, res) => {
     })
 })
 
+app.get('/getinfo/', async (req, res) => {
+    let token = req.query.token
+
+    const artistList = await fetch('https://api.spotify.com/v1/me/top/artists?limit=50', {
+        method: 'get',
+        headers: new Headers({
+            'Authorization': `Bearer ${token}`
+        })
+    })
+    const json = await artistList.json()
+
+    res.send(json)
+
+})
+
 app.listen(port, () => {
     console.log(`Running on http://localhost:${port}`)
 })
