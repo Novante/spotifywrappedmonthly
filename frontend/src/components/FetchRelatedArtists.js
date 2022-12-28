@@ -6,54 +6,56 @@ const FetchRelatedArtists = (props) => {
     let token = localStorage.getItem('token')
     const [relatedArtistImages, setRelatedArtistImages] = useState([])
     const [artists, setArtists] = useState([])
+    const [added, setAdded] = useState([])
+
     const ref = useRef()
 
     useEffect(() => {
-        console.log(props.topArtist?.id)
-        if (props.topArtist !== null || props.topArtist?.id !== undefined) {
-            // fetchRelated(props.topArtist?.id)
+        let counter = 0
+        let div = document.getElementById('relatedArtistImageContainer')
+        console.log(props.fetchedRelatedArtists)
+        let tempArr = []
+        for (let i = 0; i < props.fetchedRelatedArtists.length; i++) {
+            let img = new Image()
+            img.addEventListener('load', () => {
+                if (img.height !== 160 || img.width !== 160){
+                    counter++
+                } else {
+                    console.log(img)
+                    tempArr.push({img: img.src, index: counter})
+                    counter++
+                }
+            })
+            img.src = props.fetchedRelatedArtists[i].images[2].url
+        }
+        setAdded(tempArr)
+
+        for (let i = 0; i < added.length; i++) {
+            let div2 = document.createElement('relatedImageBox')
+            console.log(added)
+            let img = document.createElement('img')
+            let p = document.createElement('p')
+            img.src = added[i].img
+            p.innerText = props.fetchedRelatedArtists[added[i].index].name
+            p.className = 'relatedImageBoxArtistName'
+            div2.appendChild(img);
+            div2.appendChild(p)
+            div2.className = 'relatedImageBox'
+            div.appendChild(div2)
         }
 
-        props.setRelatedImageContainerHeight(ref.current.offsetHeight)
-    }, [props.topArtist])
 
 
+        console.log(tempArr)
 
 
-    console.log(relatedArtistImages)
+    },[props.artists])
 
-    // const fetchRelated = async (id) => {
-    //     let tempArr = []
-    //     const res = await fetch(`https://api.spotify.com/v1/artists/${id}/related-artists`, {
-    //         method: 'get',
-    //         headers: new Headers({
-    //             'Authorization': `Bearer ${token}`
-    //         })
-    //     })
-    //     const json = await res.json()
-    //     console.log(json.artists)
-    //
-    //     for (let i = 0; i < json.artists.length; i++) {
-    //         if (json.artists[i].images[2].height === 160 && json.artists[i].images[2].width === 160) {
-    //             tempArr.push(json.artists[i])
-    //         }
-    //     }
-    //
-    //     console.log(json.artists[0].name)
-    //     setRelatedArtistImages(tempArr)
-    //     setArtists(tempArr)
-    //
-    // }
+
 
     return (
         <div className="relatedArtistImageContainerWrapper">
             <div ref={ref} id="relatedArtistImageContainer" className="relatedArtistImageContainer">
-                {artists &&
-                    artists.map((artist) => {
-                        return <RelatedImageBox artists={artist} image={artist.images[2].url}/>
-                    })
-                }
-
 
             </div>
         </div>)

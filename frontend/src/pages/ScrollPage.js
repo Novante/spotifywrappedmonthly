@@ -23,10 +23,8 @@ const ScrollPage = (props) => {
     }, [relatedImageBoxHeight])
 
     useEffect(() => {
-        if (props.allArtists !== 0){
-            console.log(props.allArtists)
-        }
-    }, [props.allArtists])
+console.log(props.relatedArtists)
+    }, [props.relatedArtists])
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
@@ -92,14 +90,14 @@ const ScrollPage = (props) => {
                         <div className="topArtistScroll">{props?.allArtists[0]?.name}</div>
                     </div>
                         <div style={{width: '70%', flexDirection: 'column', marginTop: '50px'}}>
-                        <p id="topArtistMonthText" className="topArtistText">Your top artist of the month is {props?.allArtists[0]?.name}!</p>
+                        <p id="topArtistMonthText" className="topArtistText">Your top artist of the month is {props.topArtist.name}!</p>
                         <p id="similarArtistsText" className="topArtistText" style={{marginTop: '70px'}}>While we know that you can't get enough of them, here are a few similar artists that deserve some love too:</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <FetchRelatedArtists setRelatedImageContainerHeight={setRelatedImageContainerHeight} topArtist={props.allArtists[0]}></FetchRelatedArtists>
+            <FetchRelatedArtists setRelatedImageContainerHeight={setRelatedImageContainerHeight} fetchedRelatedArtists={props.fetchedRelatedArtists}></FetchRelatedArtists>
 
 
 

@@ -29,10 +29,10 @@ const nav = useNavigate()
     }, [window.location.href])
 
     useEffect(() => {
-        if (props.fetchedArtists !== null){
+        if (props.fetchedArtists !== null && props.fetchedRelatedArtists !== null){
                 nav('/stats')
         }
-    },[props.fetchedArtists])
+    },[props.fetchedArtists, props.fetchedRelatedArtists])
 
     const getInfo = async (token) => {
         const res = await fetch(`http://localhost:3001/getinfo?token=${token}`)
@@ -42,9 +42,9 @@ const nav = useNavigate()
         const res2 = await fetch(`http://localhost:3001/getrelatedartists?token=${token}&artistId=${json.items[0].id}`)
         const json2 = await res2.json()
 
-        props.setFetchedArtist(json.items)
-        console.log(json2.items)
-        // props.setFetchedRelatedArtists(json2.items)
+       props.setFetchedArtist(json.items)
+        console.log(json2)
+       props.setFetchedRelatedArtists(json2)
         authed = true
     }
 

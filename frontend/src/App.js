@@ -18,9 +18,8 @@ function App() {
       <BrowserRouter>
           <div>
           <Routes>
-              <Route path="/" element={<Homepage fetchedArtists={fetchedArtist} setFetchedArtist={setFetchedArtist} setFetchedRelatedArtists={setFetchedRelatedArtists} token={token} setToken={setToken} artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs}/>}/>
-              <Route path="/stats" element={<StatsPage artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs} fetchedArtist={fetchedArtist}/>} />
-              <Route path="/scroll" element={<ScrollPage artist={artist} songs={songs}/>}/>
+              <Route path="/" element={<Homepage fetchedRelatedArtists={fetchedRelatedArtists} fetchedArtists={fetchedArtist} setFetchedArtist={setFetchedArtist} setFetchedRelatedArtists={setFetchedRelatedArtists} token={token} setToken={setToken} artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs}/>}/>
+              <Route path="/stats" element={<StatsPage fetchedRelatedArtists={fetchedRelatedArtists} fetchedArtist={fetchedArtist}/>}/>
           </Routes>
           </div>
       </BrowserRouter>

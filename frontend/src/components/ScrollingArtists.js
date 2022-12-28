@@ -14,14 +14,14 @@ const ScrollingArtists = (props) => {
     useLayoutEffect(() => {
         let tempArr = []
 
-        console.log(props.filtered)
-        console.log(props.pxArtistImages.length)
+        // console.log(props.filtered)
+        // console.log(props.pxArtistImages.length)
         if (testRef.current.offsetHeight !== 0) {
             console.log(testRef.current.offsetHeight)
           (testRef.current.offsetHeight)
         }
 
-        console.log(props.filtered)
+        // console.log(props.filtered)
         setFilteredArray(props.filtered)
 
         if (props.filtered !== null) {
@@ -30,7 +30,7 @@ const ScrollingArtists = (props) => {
                 img.addEventListener('load', () => {
                     if (img.height !== 320 || img.width !== 320){
                     } else {
-                        console.log(img)
+                        // console.log(img)
                         tempArr.push(img.src)
                     }
                 })
@@ -47,7 +47,7 @@ const ScrollingArtists = (props) => {
             for (let i = 0; i < added.length; i++) {
                 console.log(added.length)
                 let img = document.createElement('img')
-                console.log(added[i])
+                // console.log(added[i])
                 img.src = added[i]
                 div.appendChild(img);
             }
@@ -75,10 +75,7 @@ const ScrollingArtists = (props) => {
     const ref = useRef()
     return (
         <div className="scrollingPastArtistImageContainerWrapper">
-            <div ref={testRef} id="scrollingPastArtistImageContainer" className="scrollingPastArtistImageContainer">
-
-
-            </div>
+            <div ref={testRef} id="scrollingPastArtistImageContainer" className="scrollingPastArtistImageContainer"/>
         </div>
     )
 }

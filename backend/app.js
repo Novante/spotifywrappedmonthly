@@ -58,7 +58,6 @@ app.get('/getinfo/', async (req, res) => {
 app.get('/getrelatedartists/', async(req,res) => {
     let token = req.query.token
     let artistId = req.query.artistId
-    console.log('neger')
 
         let tempArr = []
         const artistList = await fetch(`https://api.spotify.com/v1/artists/${artistId}/related-artists`, {

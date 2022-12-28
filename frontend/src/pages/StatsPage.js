@@ -20,9 +20,8 @@ const StatsPage = (props) => {
 
 
     useEffect(() => {
-        fetchArtists()
-        fetchSongs()
-    }, [])
+        console.log(props)
+    }, [props.fetchedRelatedArtists])
 
     useEffect(() => {
         if (artists !== 0) {
@@ -39,28 +38,17 @@ const StatsPage = (props) => {
         }
     }, [pxArtistImages])
 
-    const fetchArtists = async () => {
-        artistList = await fetch('https://api.spotify.com/v1/me/top/artists?limit=50', {
-            method: 'get',
-            headers: new Headers({
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            })
-        })
-        const json = await artistList.json()
-        setArtists(json.items)
 
-    }
-
-    const fetchSongs = async () => {
-        songList = await fetch('https://api.spotify.com/v1/me/top/tracks?time_range=short_term', {
-            method: 'get',
-            headers: new Headers({
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            })
-        })
-        const json = await artistList.json()
-        setSongs(json.items)
-    }
+    // const fetchSongs = async () => {
+    //     songList = await fetch('https://api.spotify.com/v1/me/top/tracks?time_range=short_term', {
+    //         method: 'get',
+    //         headers: new Headers({
+    //             'Authorization': `Bearer ${localStorage.getItem('token')}`
+    //         })
+    //     })
+    //     const json = await artistList.json()
+    //     setSongs(json.items)
+    // }
 
     // function loadImg(imgsrc, callback) {
     //     let img = new Image()
@@ -104,7 +92,7 @@ const StatsPage = (props) => {
 
         </div>
 
-            <ScrollPage topArtist={allArtists[0]} allArtists={allArtists}></ScrollPage>
+            <ScrollPage fetchedRelatedArtists={props.fetchedRelatedArtists} topArtist={props.fetchedArtist[0]} allArtists={props.fetchedArtist}></ScrollPage>
 
         </div>
 
