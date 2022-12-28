@@ -12,7 +12,6 @@ const StatsPage = (props) => {
     const [artists, setArtists] = useState(0)
     const [songs, setSongs] = useState([])
     const [pxArtistImages, setpxArtistImages] = useState([])
-    const [containerHeight, setContainerHeight] = useState()
     const [filtered, setFiltered] = useState([])
     let artistList = ""
     let songList = []
@@ -100,7 +99,7 @@ const StatsPage = (props) => {
             <WelcomeMessage token={props.token}></WelcomeMessage>
             <LoginMessage></LoginMessage>
 
-            <ScrollingArtists filtered={props.fetchedArtist} setContainerHeight={setContainerHeight}
+            <ScrollingArtists filtered={props.fetchedArtist}
                               pxArtistImages={pxArtistImages}></ScrollingArtists>
 
         </div>

@@ -6,20 +6,21 @@ const ScrollingArtists = (props) => {
     const [filteredLength, setFilteredLength] = useState(props.filtered.length)
     const [addedImageArray, setAddedImageArray] = useState()
     const [filteredArray, setFilteredArray] = useState(props.filtered)
+    const [div, setDiv] = useState(0)
 
     const [added, setAdded] = useState([])
 
-    let tempArr = []
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        let tempArr = []
 
         console.log(props.filtered)
         console.log(props.pxArtistImages.length)
         if (testRef.current.offsetHeight !== 0) {
-            props.setContainerHeight(testRef.current.offsetHeight)
-
-
+            console.log(testRef.current.offsetHeight)
+          (testRef.current.offsetHeight)
         }
+
         console.log(props.filtered)
         setFilteredArray(props.filtered)
 
@@ -27,28 +28,27 @@ const ScrollingArtists = (props) => {
             for (let i = 0; i < props.filtered.length; i++) {
                 let img = new Image()
                 img.addEventListener('load', () => {
-                    console.log(img.height)
                     if (img.height !== 320 || img.width !== 320){
                     } else {
-                        tempArr.push(img)
+                        console.log(img)
+                        tempArr.push(img.src)
                     }
                 })
                 img.src = props.filtered[i].images[1].url
             }
             setAdded(tempArr)
+
+            console.log(tempArr.length)
+            // setAdded(tempArr)
         }
 
 
 
-    }, [props.filtered])
-
-    useEffect(() => {
-        if (added !== []){
-            let div = document.getElementById('scrollingPastArtistImageContainer')
-
             for (let i = 0; i < added.length; i++) {
+                console.log(added.length)
                 let img = document.createElement('img')
-                img.src = added[i].src
+                console.log(added[i])
+                img.src = added[i]
                 div.appendChild(img);
             }
 
@@ -57,30 +57,20 @@ const ScrollingArtists = (props) => {
                 let missing = 3 - remainder
                 for (let i = 0; i < missing; i++) {
                     let img = document.createElement('img')
-                    img.src = added[Math.floor(Math.random() * added.length)].src
+                    img.src = added[Math.floor(Math.random() * added.length)]
                     div.appendChild(img)
                 }
             }
 
             document.documentElement.style.setProperty('--scrollingArtistContainerEndHeight', '-' + (div.offsetHeight + 1095) + 'px')
             document.documentElement.style.setProperty('--scrollingArtistContainerAnimationDelay', '5s')
-        }
 
-    }, [added])
+    }, [props.filtered])
 
+    useLayoutEffect(() => {
+        setDiv(document.getElementById('scrollingPastArtistImageContainer'))
 
-
-
-    const checkImg320 = (e) => { // fortsätt härifrån, ta alla artister och dra bort en för varje som blir removed här. Fixa % - funktion
-        if (e.target.height !== 320 || e.target.width !== 320) {
-            setFilteredLength(filteredLength => filteredLength - 1)
-            e.target.remove()
-        }
-    }
-
-
-
-
+    },[])
 
     const ref = useRef()
     return (
