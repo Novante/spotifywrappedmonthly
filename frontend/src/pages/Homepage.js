@@ -11,9 +11,9 @@ const Homepage = (props) => {
     const [authorized, setAuthorized] = useState('')
     let authed = null
 
-const nav = useNavigate()
+    const nav = useNavigate()
 
-    useEffect( () => {
+    useEffect(() => {
         if (window.location.href.includes('token')) {
             const queryString = window.location.search
             const urlParams = new URLSearchParams(queryString)
@@ -29,10 +29,10 @@ const nav = useNavigate()
     }, [window.location.href])
 
     useEffect(() => {
-        if (props.fetchedArtists !== null && props.fetchedRelatedArtists !== null){
-                nav('/stats')
+        if (props.fetchedArtists !== null && props.fetchedRelatedArtists !== null && props.fetchedTopTracks) {
+            nav('/stats')
         }
-    },[props.fetchedArtists, props.fetchedRelatedArtists])
+    }, [props.fetchedArtists, props.fetchedRelatedArtists, props.setFetchedTopTracks])
 
     const getInfo = async (token) => {
         const res = await fetch(`http://localhost:3001/getinfo?token=${token}`)
@@ -42,13 +42,14 @@ const nav = useNavigate()
         const res2 = await fetch(`http://localhost:3001/getrelatedartists?token=${token}&artistId=${json.items[0].id}`)
         const json2 = await res2.json()
 
-       props.setFetchedArtist(json.items)
-        console.log(json2)
-       props.setFetchedRelatedArtists(json2)
+        const res3 = await fetch(`http://localhost:3001/gettoptracks?token=${token}`)
+        const json3 = await res3.json()
+
+        props.setFetchedArtist(json.items)
+        props.setFetchedRelatedArtists(json2)
+        props.setFetchedTopTracks(json3)
         authed = true
     }
-
-
 
 
     return (
@@ -62,6 +63,7 @@ const nav = useNavigate()
                 </>
             )
             }
+
 
         </div>
 

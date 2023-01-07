@@ -12,14 +12,15 @@ function App() {
 
     const [fetchedArtist, setFetchedArtist] = useState(null)
     const [fetchedRelatedArtists, setFetchedRelatedArtists] = useState(null)
+    const [fetchedTopTracks, setFetchedTopTracks] = useState(null)
 
 
     return (
       <BrowserRouter>
           <div>
           <Routes>
-              <Route path="/" element={<Homepage fetchedRelatedArtists={fetchedRelatedArtists} fetchedArtists={fetchedArtist} setFetchedArtist={setFetchedArtist} setFetchedRelatedArtists={setFetchedRelatedArtists} token={token} setToken={setToken} artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs}/>}/>
-              <Route path="/stats" element={<StatsPage fetchedRelatedArtists={fetchedRelatedArtists} fetchedArtist={fetchedArtist}/>}/>
+              <Route path="/" element={<Homepage fetchedTopTracks={fetchedTopTracks} setFetchedTopTracks={setFetchedTopTracks} fetchedRelatedArtists={fetchedRelatedArtists} fetchedArtists={fetchedArtist} setFetchedArtist={setFetchedArtist} setFetchedRelatedArtists={setFetchedRelatedArtists} token={token} setToken={setToken} artist={artist} setArtist={setArtist} songs={songs} setSongs={setSongs}/>}/>
+              <Route path="/stats" element={<StatsPage fetchedTopTracks={fetchedTopTracks} fetchedRelatedArtists={fetchedRelatedArtists} fetchedArtist={fetchedArtist}/>}/>
           </Routes>
           </div>
       </BrowserRouter>

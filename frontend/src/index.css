@@ -279,23 +279,93 @@ img {
     display: grid;
     grid-template-columns: repeat(4, 0fr);
     grid-gap: 30px;
-    margin-top: 60px;
+    margin-top: 80px;
     opacity: 0;
 }
 
 
-
-.relatedImageBox{
+.relatedImageBox {
     width: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-.relatedImageBoxArtistName{
+.relatedImageBoxArtistName {
     font-family: 'Montserrat', serif;
     font-weight: 500;
     font-size: 16px;
     color: #503651;
 }
+
+.topTrackAnalyticsWrapper {
+    margin-top: 800px;
+    width: 70%;
+    height: 320px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: 200px;
+
+}
+
+.topTrackAnalyticsCardContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.topTrackAnalyticsTitle {
+    font-family: 'Montserrat', serif;
+    font-weight: 500;
+    font-size: 50px;
+    color: #503651;
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+.topTracksTitlesContainer{
+    width: 320px;
+    height: 320px;
+    overflow: hidden;
+    border: 1px solid;
+}
+
+.trackText{
+    display: inline;
+    font-family: 'Montserrat', serif;
+    font-weight: 500;
+    word-break: break-all;
+}
+
+.analyticCircleContainer{
+    margin-top: 0px;
+    margin-left: 60px;
+    height: 200px;
+    width: 50%;
+    justify-content: space-evenly;
+    align-items: center;
+    display: flex;
+    border: 1px solid;
+}
+
+.circleTest{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:conic-gradient(#006E5F 34%, 0, #5E1100 66%);
+    border-radius: 50%;
+}
+
+.circleTest2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FF9A00;
+    height: 90%;
+    width: 90%;
+    border-radius: 50%;
+}
+
+
 

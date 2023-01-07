@@ -3,16 +3,15 @@ import {useEffect, useLayoutEffect, useRef, useState} from "react";
 const ScrollingArtists = (props) => {
 
     const testRef = useRef()
-    const [filteredLength, setFilteredLength] = useState(props.filtered.length)
-    const [addedImageArray, setAddedImageArray] = useState()
     const [filteredArray, setFilteredArray] = useState(props.filtered)
-    const [div, setDiv] = useState(0)
+    const [offsetHeight, setOffsetHeight] = useState(0)
 
     const [added, setAdded] = useState([])
 
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         let tempArr = []
+        let scrollingArtistDiv = document.getElementById('scrollingPastArtistImageContainer');
 
         // console.log(props.filtered)
         // console.log(props.pxArtistImages.length)
@@ -20,6 +19,7 @@ const ScrollingArtists = (props) => {
             console.log(testRef.current.offsetHeight)
           (testRef.current.offsetHeight)
         }
+
 
         // console.log(props.filtered)
         setFilteredArray(props.filtered)
@@ -49,7 +49,7 @@ const ScrollingArtists = (props) => {
                 let img = document.createElement('img')
                 // console.log(added[i])
                 img.src = added[i]
-                div.appendChild(img);
+                scrollingArtistDiv.appendChild(img);
             }
 
             let remainder = added.length % 3
@@ -58,21 +58,22 @@ const ScrollingArtists = (props) => {
                 for (let i = 0; i < missing; i++) {
                     let img = document.createElement('img')
                     img.src = added[Math.floor(Math.random() * added.length)]
-                    div.appendChild(img)
+                    scrollingArtistDiv.appendChild(img)
                 }
             }
 
-            document.documentElement.style.setProperty('--scrollingArtistContainerEndHeight', '-' + (div.offsetHeight + 1095) + 'px')
-            document.documentElement.style.setProperty('--scrollingArtistContainerAnimationDelay', '5s')
+            setOffsetHeight(scrollingArtistDiv.offsetHeight)
+            console.log(scrollingArtistDiv.offsetHeight, 'offset')
+
+
 
     }, [props.filtered])
 
-    useLayoutEffect(() => {
-        setDiv(document.getElementById('scrollingPastArtistImageContainer'))
+    useEffect(() => {
+        document.documentElement.style.setProperty('--scrollingArtistContainerEndHeight', '-' + (offsetHeight + 1095) + 'px')
+        document.documentElement.style.setProperty('--scrollingArtistContainerAnimationDelay', '5s')
+    }, [offsetHeight])
 
-    },[])
-
-    const ref = useRef()
     return (
         <div className="scrollingPastArtistImageContainerWrapper">
             <div ref={testRef} id="scrollingPastArtistImageContainer" className="scrollingPastArtistImageContainer"/>

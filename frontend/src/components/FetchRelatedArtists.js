@@ -11,6 +11,7 @@ const FetchRelatedArtists = (props) => {
     const ref = useRef()
 
     useEffect(() => {
+
         let counter = 0
         let div = document.getElementById('relatedArtistImageContainer')
         console.log(props.fetchedRelatedArtists)
@@ -44,12 +45,12 @@ const FetchRelatedArtists = (props) => {
             div.appendChild(div2)
         }
 
-
+  
 
         console.log(tempArr)
 
 
-    },[props.artists])
+    },[props.fetchedRelatedArtists])
 
 
 

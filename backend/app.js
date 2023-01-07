@@ -51,8 +51,25 @@ app.get('/getinfo/', async (req, res) => {
     })
     const json = await artistList.json()
 
+    console.log(json)
+
     res.send(json)
 
+})
+
+app.get('/gettoptracks', async (req, res) => {
+    let token = req.query.token
+
+    const trackList = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=50', {
+        method: 'get',
+        headers: new Headers({
+            'Authorization': `Bearer ${token}`
+        })
+    })
+
+    const json = await trackList.json()
+
+    res.send(json)
 })
 
 app.get('/getrelatedartists/', async(req,res) => {
@@ -75,14 +92,12 @@ app.get('/getrelatedartists/', async(req,res) => {
             }
         }
 
-        console.log(tempArr)
-
-        console.log(json.artists[0].name)
-
         res.send(tempArr)
 
 
 })
+
+
 
 app.listen(port, () => {
     console.log(`Running on http://localhost:${port}`)
