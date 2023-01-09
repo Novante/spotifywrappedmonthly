@@ -7,6 +7,7 @@ const ScrollingArtists = (props) => {
     const [offsetHeight, setOffsetHeight] = useState(0)
 
     const [added, setAdded] = useState([])
+    const [test, setTest] = useState(0)
 
 
     useEffect(() => {
@@ -16,8 +17,7 @@ const ScrollingArtists = (props) => {
         // console.log(props.filtered)
         // console.log(props.pxArtistImages.length)
         if (testRef.current.offsetHeight !== 0) {
-            console.log(testRef.current.offsetHeight)
-          (testRef.current.offsetHeight)
+
         }
 
 
@@ -53,7 +53,9 @@ const ScrollingArtists = (props) => {
             }
 
             let remainder = added.length % 3
+
             if (remainder !== 0){
+                console.log('remainder', remainder)
                 let missing = 3 - remainder
                 for (let i = 0; i < missing; i++) {
                     let img = document.createElement('img')
@@ -62,16 +64,24 @@ const ScrollingArtists = (props) => {
                 }
             }
 
-            setOffsetHeight(scrollingArtistDiv.offsetHeight)
-            console.log(scrollingArtistDiv.offsetHeight, 'offset')
+            const lines = scrollingArtistDiv.childElementCount / 3
+        const pixels = lines * 320
+
+
+                setOffsetHeight(pixels)
+
+        // inconsistencies with .offsetHeight, hence using calculations based off childElementCount. fine since all spotify images are 320 px.
 
 
 
+            console.log('childcount', scrollingArtistDiv.childElementCount)
     }, [props.filtered])
 
     useEffect(() => {
-        document.documentElement.style.setProperty('--scrollingArtistContainerEndHeight', '-' + (offsetHeight + 1095) + 'px')
-        document.documentElement.style.setProperty('--scrollingArtistContainerAnimationDelay', '5s')
+        if (offsetHeight !== 0) {
+            document.documentElement.style.setProperty('--scrollingArtistContainerEndHeight', '-' + (offsetHeight + 1095) + 'px')
+            document.documentElement.style.setProperty('--scrollingArtistContainerAnimationDelay', '5s')
+        }
     }, [offsetHeight])
 
     return (
