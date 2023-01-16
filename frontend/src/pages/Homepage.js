@@ -45,6 +45,7 @@ const Homepage = (props) => {
         const res3 = await fetch(`http://localhost:3001/gettoptracks?token=${token}`)
         const json3 = await res3.json()
 
+
         props.setFetchedArtist(json.items)
         props.setFetchedRelatedArtists(json2)
         props.setFetchedTopTracks(json3)

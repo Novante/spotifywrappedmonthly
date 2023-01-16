@@ -22,7 +22,7 @@ const FetchRelatedArtists = (props) => {
                 if (img.height !== 160 || img.width !== 160){
                     counter++
                 } else {
-                    console.log(img)
+                    // console.log(img)
                     tempArr.push({img: img.src, index: counter})
                     counter++
                 }
@@ -45,7 +45,7 @@ const FetchRelatedArtists = (props) => {
             div.appendChild(div2)
         }
 
-  
+
 
         console.log(tempArr)
 

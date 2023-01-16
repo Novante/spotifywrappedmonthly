@@ -9,15 +9,23 @@ const ScrollPage = (props) => {
     const [songs, setSongs] = useState(props.songs)
     let counter = 1
 
-    const scrollPageScroller = useRef()
+    const scrollPageScroller = useRef(0)
     const [imageSource, setImageSource] = useState('https://www.norrland247.se/wp-content/uploads/2020/03/soluppgangen-med-renar-i-lulea-skargard-01-1080x1350.jpg')
     let lastScrollPos = 0
     let hangScroll = 0
+    let hangScroll2 = 0
     let topArtistAndNameOpacity = 0
     let descriptionTextOpacity = 0
     let similarArtistTextOpacity = 0
     let similarArtistImageContainerOpacity = 0
 
+    const [val, setVal] = useState(0)
+
+
+
+    // useEffect(() => {
+    //     console.log(scrollPageScroller.current.getBoundingClientRect().top)
+    // }, [scrollPageScroller])
 
     useEffect(() => {
         console.log(relatedImageBoxHeight, 'FAJWIFJWAIFJWAF')
@@ -66,12 +74,15 @@ const ScrollPage = (props) => {
                 hangScroll = 20
 
             }
-
             window.scrollTo(0, 900)
+            hangScroll += 0.02
+        }
 
-            hangScroll += 0.01
-
-
+        if (window.scrollY > 3124 && hangScroll2 < 3) {
+            setVal(100)
+            lastScrollPos = 3124
+            window.scrollTo(0, 3124)
+            hangScroll2 += 0.02
         }
 
 
@@ -103,7 +114,7 @@ const ScrollPage = (props) => {
 
                 <FetchRelatedArtists setRelatedImageContainerHeight={setRelatedImageContainerHeight}
                                      fetchedRelatedArtists={props.fetchedRelatedArtists}></FetchRelatedArtists>
-                <TopTrackAnalytics fetchedTopTracks={props.fetchedTopTracks}></TopTrackAnalytics>
+                <TopTrackAnalytics val={val} fetchedTopTracks={props.fetchedTopTracks}></TopTrackAnalytics>
 
 
             </div>
